@@ -1,10 +1,21 @@
 import { ExtendableContext } from 'koa'
 import bcrypt from 'bcryptjs'
-import { emailRegex, jwtSign } from '../utils'
+import consola from 'consola'
+import { emailRegex, jwtSign, jwtVerify, md5 } from '../utils'
 import { User } from '../entity/User'
 
 export default async function handler(ctx: ExtendableContext) {
   const { body } = ctx.request
+
+  ctx.validate(body, 'Request body should not be empty')
+
+  const captchaData = jwtVerify(body.captchaToken) as any
+  consola.log(captchaData)
+
+  ctx.validate(typeof captchaData === 'object', 'Invalid captcha token')
+  ctx.validate(typeof captchaData.resultMD5 === 'string', 'Invalid captcha token')
+  ctx.validate(captchaData.generationTime + (5 * 60 * 60 * 1000) > new Date().getTime(), 'Expired captcha')
+  ctx.validate(captchaData.resultMD5 === md5(body.captcha), 'Invalid captcha')
 
   ctx.validate(body.email != null, 'Request body should contain email')
   ctx.validate(typeof body.email === 'string', 'Email should be type string')
