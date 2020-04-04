@@ -28,7 +28,7 @@ export default async function handler(ctx: ExtendableContext) {
   const user = new User()
   user.email = body.email
   user.password = await bcrypt.hash(body.password, await bcrypt.genSalt())
-  user.isMerchant = !!body.isMerchan
+  user.isMerchant = !!body.isMerchant
   user.name = body.name
   user.location = body.location || ''
 
