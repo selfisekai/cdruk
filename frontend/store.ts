@@ -17,6 +17,8 @@ export const actionTypes = {
   LOGIN_ERROR: 'LOGIN_ERROR',
   LOGIN_PENDING: 'LOGIN_PENDING',
   LOGOUT: 'LOGOUT',
+
+  
 }
 
 // REDUCERS
