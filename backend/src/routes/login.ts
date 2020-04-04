@@ -20,7 +20,7 @@ export default async function login(ctx: ExtendableContext) {
   if (user == null || user.password == null) return
 
   ctx.validate(user.email === body.email, 'Invalid username or password')
-  ctx.validate(bcrypt.compare(body.password, user.password), 'Invalid username or password')
+  ctx.validate(await bcrypt.compare(body.password, user.password), 'Invalid username or password')
 
   const token = jwtSign({ ...user })
   ctx.body = {
