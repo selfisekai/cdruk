@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
 
 function Menu() {
-  const [isActive, setisActive] = React.useState(false)
+  const [isActive, setisActive] = useState(false)
+  const isLogged = useSelector<{ isLogged: boolean }>((state) => state.isLogged)
 
   return (
     <div>
