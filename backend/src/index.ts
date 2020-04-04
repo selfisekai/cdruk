@@ -8,6 +8,7 @@ import cors from '@koa/cors'
 import consola from 'consola'
 import { Connection, createConnection } from 'typeorm'
 import register from './routes/register'
+import newCaptcha from './routes/newCaptcha'
 import login from './routes/login'
 
 let db: Connection
@@ -23,7 +24,7 @@ koa
     secret: process.env.JWT_SECRET || 'ddd',
     getToken: (ctx) => ctx.headers.Authorization?.replace('Bearer ') || ''
   })
-    .unless({ path: [/^\//, /^\/register\/?$/, /^\/login\/?$/] }))
+    .unless({ path: [/^\//, /^\/register(?:\/newCaptcha)?\/?$/, /^\/login\/?$/] }))
   .use(router.routes())
   .use(router.allowedMethods())
   .use(cors({ credentials: true }))
@@ -43,6 +44,7 @@ router
     }
   })
   .post('/register', register)
+  .get('/register/newCaptcha', newCaptcha)
   .post('/login', login)
   .get('/objects', (ctx) => {
     ctx.body = ctx.request.body
