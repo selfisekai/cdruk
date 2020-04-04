@@ -42,16 +42,19 @@ export const reducer = (state = defaultState, action) => {
 }
 
 // ACTIONS
-export const signup = (email: string, password: string) => async (dispatch) => {
+export const signup = (email: string, name: string, password: string) => async (
+  dispatch
+) => {
   try {
     const { data } = await api.post('/register', {
       email,
+      name,
       password,
     })
     dispatch({ type: actionTypes.SIGN_UP_PENDING })
     dispatch({
       type: actionTypes.SIGN_UP_SUCCES,
-      payload: { user: { email, token: data.data.token } },
+      payload: { user: { email, name, token: data.data.token } },
     })
   } catch (error) {
     dispatch({ type: actionTypes.SIGN_UP_ERROR })
