@@ -10,7 +10,4 @@ export class User {
 
   @Column()
   password?: string
-
-  @Column()
-  passwordSalt?: string;
 }

@@ -23,8 +23,7 @@ export default async function handler(ctx: ExtendableContext) {
 
   const user = new User()
   user.email = body.email
-  user.passwordSalt = await bcrypt.genSalt()
-  user.password = await bcrypt.hash(body.password, user.passwordSalt)
+  user.password = await bcrypt.hash(body.password, await bcrypt.genSalt())
 
   await repo.save(user)
 
@@ -32,8 +31,7 @@ export default async function handler(ctx: ExtendableContext) {
   ctx.cookies.set('laravel_session', token)
   ctx.body = {
     data: {
-      token,
-      user
+      token
     }
   }
 }

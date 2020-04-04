@@ -26,8 +26,7 @@ export default async function login(ctx: ExtendableContext) {
   ctx.cookies.set('laravel_session', token)
   ctx.body = {
     data: {
-      token,
-      user
+      token
     }
   }
 }
