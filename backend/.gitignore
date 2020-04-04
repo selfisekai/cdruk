@@ -1,5 +1,6 @@
 build
 database.sqlite
+config.json
 
 # Logs
 logs

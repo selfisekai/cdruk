@@ -1,0 +1,4 @@
+{
+  "jwtSecret": "ddd",
+  "httpPort": 3001
+}
