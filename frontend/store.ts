@@ -8,29 +8,33 @@ const defaultState = {
   user: null,
   isLogged: false,
   errors: [],
+  merchants: [],
 }
 
 export const actionTypes = {
-  SIGN_UP_SUCCES: 'SIGN_UP_SUCCES',
+  SIGN_UP_SUCCESS: 'SIGN_UP_SUCCESS',
   SIGN_UP_ERROR: 'SIGN_UP_ERROR',
   SIGN_UP_PENDING: 'SIGN_UP_PENDING',
-  LOGIN_SUCCES: 'LOGIN_SUCCES',
+  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_ERROR: 'LOGIN_ERROR',
   LOGIN_PENDING: 'LOGIN_PENDING',
   LOGOUT: 'LOGOUT',
   SET_TOKEN: 'SET_TOKEN',
+  FETCH_MERCHANTS_PENDING: 'FETCH_MERCHANTS_PENDING',
+  FETCH_MERCHANTS_SUCCESS: 'FETCH_MERCHANTS_SUCCESS',
+  FETCH_MERCHANTS_ERROR: 'FETCH_MERCHANTS_ERROR',
 }
 
 // REDUCERS
 export const reducer = (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.SIGN_UP_SUCCES:
+    case actionTypes.SIGN_UP_SUCCESS:
       return { ...state, user: action.payload.user, isLogged: true }
     case actionTypes.SIGN_UP_PENDING:
       return { ...state, isLogged: false }
     case actionTypes.SIGN_UP_ERROR:
       return { ...state, isLogged: false }
-    case actionTypes.LOGIN_SUCCES:
+    case actionTypes.LOGIN_SUCCESS:
       return { ...state, user: action.payload.user, isLogged: true }
     case actionTypes.LOGIN_PENDING:
       return { ...state, isLogged: false }
@@ -44,6 +48,10 @@ export const reducer = (state = defaultState, action) => {
       }
     case actionTypes.LOGOUT:
       return { ...state, user: null, isLogged: false }
+
+    case actionTypes.FETCH_MERCHANTS_SUCCESS:
+      return { ...state, merchants: action.payload.merchants }
+
     default:
       return state
   }
@@ -66,7 +74,7 @@ export const signup = (email: string, name: string, password: string) => async (
     })
 
     dispatch({
-      type: actionTypes.SIGN_UP_SUCCES,
+      type: actionTypes.SIGN_UP_SUCCESS,
       payload: { user: { email, name, token: data.data.token } },
     })
   } catch (error) {
@@ -83,7 +91,7 @@ export const login = (email: string, password: string) => async (dispatch) => {
       expires: 30, // one month
     })
     dispatch({
-      type: actionTypes.LOGIN_SUCCES,
+      type: actionTypes.LOGIN_SUCCESS,
       payload: { user: { email, token: data.data.token } },
     })
   } catch (error) {
@@ -101,6 +109,28 @@ export const setToken = (token: string) => async (dispatch) => {
     expires: 30, // one month
   })
   dispatch({ type: actionTypes.SET_TOKEN, payload: { user: { token } } })
+}
+
+export const fetchMerchants = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: actionTypes.FETCH_MERCHANTS_PENDING })
+    const { data } = await api.post(
+      '/merchants',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${getState().initialState.user.token}`,
+        },
+      }
+    )
+
+    dispatch({
+      type: actionTypes.FETCH_MERCHANTS_SUCCESS,
+      payload: { merchants: data.data },
+    })
+  } catch (error) {
+    dispatch({ type: actionTypes.FETCH_MERCHANTS_ERROR })
+  }
 }
 
 export function initializeStore(initialState = defaultState) {
