@@ -5,16 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { connect } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { signup } from '../store'
-import { useRouter } from 'next/router'
 
 function Signup() {
   const isLogged = useSelector<{ isLogged: boolean }>((state) => state.isLogged)
-  const router = useRouter()
   const dispatch = useDispatch()
   const { register, handleSubmit } = useForm() // initialise the hook
   const onSubmit = ({ email, name, password }) => {
     dispatch(signup(email, name, password))
-    router.push('/')
   }
 
   return (

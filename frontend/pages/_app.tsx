@@ -4,8 +4,40 @@ import withReduxStore from '../lib/with-redux-store'
 import { Provider } from 'react-redux'
 import '../node_modules/bulma/bulma.sass'
 import '../css/theme.scss'
+import nookies from 'nookies'
+import { setToken } from '../store'
 
-class MyApp extends App<{ reduxStore }> {
+class MyApp extends App<{ token: string; reduxStore }> {
+  static async getInitialProps({ Component, ctx }) {
+    const { token } = nookies.get(ctx)
+
+    let loggedIn = false
+
+    if (token) {
+      // Set the token on the server side
+      ctx.reduxStore.dispatch(setToken(token) as any)
+      loggedIn = true
+      if (ctx.pathname === '/login' || ctx.pathname === '/signup') {
+        ctx.res.writeHead(301, { Location: '/' })
+        ctx.res.end()
+      }
+    }
+
+    const pageProps = Component.getInitialProps
+      ? await Component.getInitialProps(ctx)
+      : {}
+
+    return { pageProps, token, loggedIn }
+  }
+
+  componentDidMount() {
+    const { token, reduxStore } = this.props
+    if (token) {
+      // Set token on the client side too
+      reduxStore.dispatch(setToken(token) as any)
+    }
+  }
+
   render() {
     const { Component, pageProps, reduxStore } = this.props
     return (
