@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Footer from '../components/footer'
 import Link from 'next/link'
-import Model from '../components/model'
+import { fetchModels } from '../store'
+import { useDispatch, useSelector } from 'react-redux'
+
+type Model = {
+  id?: number
+
+  name?: string
+
+  description?: string
+
+  stlFile?: string
+
+  pictureURI?: string
+}
 
 function Models() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchModels())
+  }, [])
+  const models = useSelector((state: { models: Model[] }) => state.models)
+
   return (
     <div>
       <div className="selection">
@@ -15,27 +35,26 @@ function Models() {
         <div className="selection">
           <div className="container">
             <div className="list">
-              {[1, 2, 3].map((el) => (
-                <div key={el} className="list-item">
-                  <div className="card">
-                    <Model />
-                    <div className="card-content">
-                      <div className="media">
-                        <div className="media-content">
-                          <p className="title is-4">John Smith</p>
-                          <p className="subtitle is-6">@johnsmith</p>
+              {models && models.length > 0 ? (
+                models.map((el) => (
+                  <div key={el.id} className="list-item">
+                    <div className="card">
+                      <img src={el.pictureURI} alt={el.pictureURI} />
+                      <div className="card-content">
+                        <div className="media">
+                          <div className="media-content">
+                            <p className="title is-4">{el.name}</p>
+                          </div>
                         </div>
-                      </div>
 
-                      <div className="content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                        <a href="#">#css</a> <a href="#">#responsive</a>
+                        <div className="content">{el.description}</div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <h1 className="title is-3">No models avaliable</h1>
+              )}
             </div>
           </div>
         </div>
