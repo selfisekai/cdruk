@@ -1,3 +1,6 @@
+build
+database.sqlite
+
 # Logs
 logs
 *.log
