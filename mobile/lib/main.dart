@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 
 import 'signup_screen.dart';
 import 'models_screen.dart';
+import 'contact_screen.dart';
 import 'package:cdruk/login_screen.dart';
 
 void main() {
@@ -70,7 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       text: '\nZgłoś się do nas!',
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                         //todo navigate to contact screen that not exist yet
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ContactScreen()));
                         })
                 ]),
           )
@@ -112,7 +116,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ListTile(
                 title: Text('Contact'),
                 onTap: () {
-                  //todo page with contact to us
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ContactScreen()));
                 },
               )
             ]).toList(),
