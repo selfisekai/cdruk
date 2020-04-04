@@ -4,7 +4,7 @@ import 'package:cdruk/api_response.dart';
 import 'package:http/http.dart' as http;
 
 class _Api {
-  final baseUrl = 'http://192.168.1.220:4000';
+  final baseUrl = 'https://cdruk.ddd.codes/api';
 
   Future<dynamic> login(String email, String password) async {
     var res = await http.post(
