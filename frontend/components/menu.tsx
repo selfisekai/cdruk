@@ -2,11 +2,19 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../store'
+import { useRouter } from 'next/router'
 
 function Menu() {
   const [isActive, setisActive] = useState(false)
   const isLogged = useSelector<{ isLogged: boolean }>((state) => state.isLogged)
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const logoutUser = () => {
+    dispatch(logout())
+    router.push('/')
+  }
 
   return (
     <div>
@@ -36,9 +44,10 @@ function Menu() {
               <a className="navbar-item">CDRUK</a>
             </Link>
           </div>
-          {!isLogged && (
-            <div className="navbar-end">
-              <div className="navbar-item">
+
+          <div className="navbar-end">
+            <div className="navbar-item">
+              {!isLogged ? (
                 <div className="buttons">
                   <Link href="/signup">
                     <a className="button is-primary">
@@ -49,9 +58,15 @@ function Menu() {
                     <a className="button is-light">Log in</a>
                   </Link>
                 </div>
-              </div>
+              ) : (
+                <div className="buttons">
+                  <button onClick={logoutUser} className="button is-light">
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </nav>
     </div>

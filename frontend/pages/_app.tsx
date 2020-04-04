@@ -6,8 +6,6 @@ import '../node_modules/bulma/bulma.sass'
 import '../css/theme.scss'
 import nookies from 'nookies'
 import { setToken } from '../store'
-import Router from 'next/router'
-import { isBrowser } from '../lib/cookies'
 
 class MyApp extends App<{ token: string; reduxStore }> {
   static async getInitialProps({ Component, ctx }) {
