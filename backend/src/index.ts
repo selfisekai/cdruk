@@ -26,9 +26,9 @@ koa
     getToken: (ctx) => ctx.headers.Authorization?.replace('Bearer ') || ''
   })
     .unless({ path: [/^\//, /^\/register\/?$/, /^\/login\/?$/] }))
+  .use(cors({ credentials: true }))
   .use(router.routes())
   .use(router.allowedMethods())
-  .use(cors({ credentials: true }))
 
 koa.context.validate = function validate(value: any, message: string) {
   if (!value) this.throw(400, JSON.stringify({ error: message }))
