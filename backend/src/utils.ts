@@ -1,5 +1,8 @@
-import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken'
 
-export const hashPassword = (password: string, salt: string) => bcrypt.hash(password, salt);
+export function jwtSign(payload: any) {
+  return jwt.sign(payload, process.env.JWT_SECRET || 'ddd')
+}
 
-export const generateSalt = () => bcrypt.genSalt();
+// eslint-disable-next-line no-useless-escape
+export const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/

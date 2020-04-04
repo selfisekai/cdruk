@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "node build/index.js",
+    "start": "node -r dotenv/config build/index.js",
     "dev": "npm run build && npm start"
   },
   "devDependencies": {
@@ -33,6 +33,7 @@
     "@types/koa-session": "^5.10.2",
     "bcryptjs": "^2.4.3",
     "consola": "^2.11.3",
+    "dotenv": "^8.2.0",
     "fs-extra": "^9.0.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.11.0",

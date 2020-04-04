@@ -1,0 +1,11 @@
+version: 3
+
+services:
+  backend:
+    container_name: cdruk-backend
+    build: .
+    ports:
+      - 127.0.0.1:17826:3000
+    volumes:
+      - ./database.sqlite:/app/database.sqlite
+    env_file: .env
