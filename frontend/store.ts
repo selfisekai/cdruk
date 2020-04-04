@@ -44,11 +44,14 @@ export const reducer = (state = defaultState, action) => {
 // ACTIONS
 export const signup = (email: string, password: string) => async (dispatch) => {
   try {
-    await api('/register', { method: 'POST', data: { email, password } })
+    const { data } = await api('/register', {
+      method: 'POST',
+      data: { email, password },
+    })
     dispatch({ type: actionTypes.SIGN_UP_PENDING })
     dispatch({
       type: actionTypes.SIGN_UP_SUCCES,
-      payload: { email, password },
+      payload: { user: { email, token: data.data.token } },
     })
   } catch (error) {
     dispatch({ type: actionTypes.SIGN_UP_ERROR })
@@ -64,7 +67,7 @@ export const login = (email: string, password: string) => async (dispatch) => {
     dispatch({ type: actionTypes.LOGIN_PENDING })
     dispatch({
       type: actionTypes.LOGIN_SUCCES,
-      payload: { email: data.email, password: data.password },
+      payload: { user: { email, token: data.data.token } },
     })
   } catch (error) {
     dispatch({ type: actionTypes.LOGIN_ERROR })
