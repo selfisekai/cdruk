@@ -28,7 +28,6 @@ export default async function handler(ctx: ExtendableContext) {
   await repo.save(user)
 
   const token = jwtSign({ ...user })
-  ctx.cookies.set('laravel_session', token)
   ctx.body = {
     data: {
       token

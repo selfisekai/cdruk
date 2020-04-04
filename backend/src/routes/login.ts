@@ -23,7 +23,6 @@ export default async function login(ctx: ExtendableContext) {
   ctx.validate(bcrypt.compare(body.password, user.password), 'Invalid username or password')
 
   const token = jwtSign({ ...user })
-  ctx.cookies.set('laravel_session', token)
   ctx.body = {
     data: {
       token

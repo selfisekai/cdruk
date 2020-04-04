@@ -21,7 +21,7 @@ koa
   .use(bodyParser())
   .use(session({
     secret: process.env.JWT_SECRET || 'ddd',
-    getToken: (ctx) => ctx.cookies.get('laravel_session') || ctx.headers.Authorization?.replace('Bearer ')
+    getToken: (ctx) => ctx.headers.Authorization?.replace('Bearer ') || ''
   })
     .unless({ path: [/^\//, /^\/register\/?$/, /^\/login\/?$/] }))
   .use(router.routes())
