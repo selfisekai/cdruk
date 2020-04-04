@@ -40,7 +40,7 @@ function Singup() {
                 </div>
                 <div className="field">
                   <p className="control">
-                    <button className="button is-success">Sing Up</button>
+                    <button className="button is-primary">Sing Up</button>
                   </p>
                 </div>
               </div>

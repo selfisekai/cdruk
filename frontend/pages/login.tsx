@@ -40,7 +40,7 @@ function Login() {
                 </div>
                 <div className="field">
                   <p className="control">
-                    <button className="button is-success">Login</button>
+                    <button className="button is-primary">Login</button>
                   </p>
                 </div>
               </div>
