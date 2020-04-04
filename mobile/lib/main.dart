@@ -1,9 +1,10 @@
-import 'package:cdruk/login_screen.dart';
-import 'package:flutter/gestures.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 
 import 'signup_screen.dart';
-import 'signup_screen.dart';
+import 'models_screen.dart';
+import 'package:cdruk/login_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -104,7 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ListTile(
                 title: Text('3D Models'),
                 onTap: () {
-                  //todo page with links to 3d models
+                 Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ModelsScreen()));
                 },
               ),
               ListTile(
