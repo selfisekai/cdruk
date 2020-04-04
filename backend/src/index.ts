@@ -88,19 +88,19 @@ router
   .post('/login', (ctx) => {
     ctx.body = ctx.request.body
   })
-  .post('/getObjects', (ctx) => {
+  .get('/objects', (ctx) => {
     ctx.body = ctx.request.body
   })
-  .post('/getMerchants', (ctx) => {
+  .get('/merchants', (ctx) => {
     ctx.body = ctx.request.body
   })
-  .post('/getMerchantQueue', (ctx) => {
+  .get('/queue', (ctx) => {
     ctx.body = ctx.request.body
   })
   .post('/order', (ctx) => {
     ctx.body = ctx.request.body
   })
-  .post('/getOrder', (ctx) => {
+  .get('/orders', (ctx) => {
     ctx.body = ctx.request.body
   })
 
