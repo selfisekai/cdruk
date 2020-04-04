@@ -28,9 +28,9 @@ export default async function handler(ctx: ExtendableContext) {
   const user = new User()
   user.email = body.email
   user.password = await bcrypt.hash(body.password, await bcrypt.genSalt())
-  user.isMerchant = body.isMerchant == 'true' ? true : false
+  user.isMerchant = !!body.isMerchan
   user.name = body.name
-  user.location = body.location ? body.location : ''
+  user.location = body.location || ''
 
   await repo.save(user)
 
