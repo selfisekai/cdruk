@@ -11,19 +11,22 @@ function Index() {
         <div className="container">
           <h1 className="title is-3">cdruk</h1>
           <h2 className="subtitle is-4">
-            Lekarzom w całej Polsce brakuje sprzętu. Potrzebna jest im teraz pomoc, aby mogli pomagać nam.
+            Doctors around the world lack equipment. They need help so that they
+            can help us.
           </h2>
           <p className="subtitle is-4 has-text-weight-semibold">
-            Masz drukarkę 3D? {' '}
+            Do you have a 3D printer?&nbsp;
             <Link href="/signup">
-              <a className="button is-inline is-primary">Dołącz do akcji</a>
-            </Link> {' '}
-            i drukuj sprzęt dla pobliskich szpitali.
+              <a className="button is-inline is-primary">Join us</a>
+            </Link>
+            &nbsp;and print equipment for nearby hospitals.
           </p>
           <p className="subtitle is-4 has-text-weight-semibold">
-             W twoim szpitalu brakuje sprzętu? {' '}
-             <Link href="/signup">
-              <a className="button is-inline is-primary is-light">Zgłoś się do nas tutaj!</a>
+            Does your hospital lack equipment?&nbsp;
+            <Link href="/signup">
+              <a className="button is-inline is-primary is-light">
+                Come to us here!
+              </a>
             </Link>
           </p>
         </div>
