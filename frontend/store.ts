@@ -9,6 +9,7 @@ const defaultState = {
   isLogged: false,
   errors: [],
   merchants: [],
+  models: [],
 }
 
 export const actionTypes = {
@@ -23,6 +24,9 @@ export const actionTypes = {
   FETCH_MERCHANTS_PENDING: 'FETCH_MERCHANTS_PENDING',
   FETCH_MERCHANTS_SUCCESS: 'FETCH_MERCHANTS_SUCCESS',
   FETCH_MERCHANTS_ERROR: 'FETCH_MERCHANTS_ERROR',
+  FETCH_MODELS_PENDING: 'FETCH_MODELS_PENDING',
+  FETCH_MODELS_SUCCESS: 'FETCH_MODELS_SUCCESS',
+  FETCH_MODELS_ERROR: 'FETCH_MODELS_ERROR',
 }
 
 // REDUCERS
@@ -51,6 +55,8 @@ export const reducer = (state = defaultState, action) => {
 
     case actionTypes.FETCH_MERCHANTS_SUCCESS:
       return { ...state, merchants: action.payload.merchants }
+    case actionTypes.FETCH_MODELS_SUCCESS:
+      return { ...state, merchants: action.payload.models }
 
     default:
       return state
@@ -114,15 +120,11 @@ export const setToken = (token: string) => async (dispatch) => {
 export const fetchMerchants = () => async (dispatch, getState) => {
   try {
     dispatch({ type: actionTypes.FETCH_MERCHANTS_PENDING })
-    const { data } = await api.post(
-      '/merchants',
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${getState().initialState.user.token}`,
-        },
-      }
-    )
+    const { data } = await api.get('/merchants', {
+      headers: {
+        Authorization: `Bearer ${getState().initialState.user.token}`,
+      },
+    })
 
     dispatch({
       type: actionTypes.FETCH_MERCHANTS_SUCCESS,
@@ -130,6 +132,24 @@ export const fetchMerchants = () => async (dispatch, getState) => {
     })
   } catch (error) {
     dispatch({ type: actionTypes.FETCH_MERCHANTS_ERROR })
+  }
+}
+
+export const fetchModels = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: actionTypes.FETCH_MODELS_PENDING })
+    const { data } = await api.get('/models', {
+      headers: {
+        Authorization: `Bearer ${getState().initialState.user.token}`,
+      },
+    })
+
+    dispatch({
+      type: actionTypes.FETCH_MODELS_SUCCESS,
+      payload: { models: data.data },
+    })
+  } catch (error) {
+    dispatch({ type: actionTypes.FETCH_MODELS_ERROR })
   }
 }
 
