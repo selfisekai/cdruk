@@ -22,13 +22,13 @@ class _ContactScreenState extends State<ContactScreen> {
               RichText(
                 text: TextSpan(
                     text:
-                        'Twój szpital potrzebuje sprzętu? Skontaktuj się z nami!\n',
+                        'Twój szpital potrzebuje sprzętu? Skontaktuj się z nami i zostanies umieszczony na mapie!\n',
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.black87,
                     ),
                     children: <TextSpan>[
-                      TextSpan(text: "E-mail: example@email.com")
+                      TextSpan(text: "\nE-mail: example@email.com")
                     ]),
               )
             ]),

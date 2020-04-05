@@ -23,7 +23,8 @@ class _ModelsScreenState extends State<ModelsScreen> {
               InkWell(
                 child: Text('Przyłbica prusy'),
                 onTap: () => launch('https://www.prusaprinters.org/prints/25857-prusa-face-shield'),
-              )
+              ),
+              Image(image: AssetImage('assets/Prusa_cover.jpg'),)
             ]),
       ),
     );
