@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cdruk/api_response.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class _Api {
   final baseUrl = 'https://cdruk.ddd.codes/api';
@@ -25,6 +26,18 @@ class _Api {
     print(res.body);
     var resp = json.decode(res.body);
     if (resp['error'] == null) return ApiResponse.fromJson(resp);
+    else return resp;
+  }
+
+  Future<dynamic> getProfiile() async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    var res = await http.get(
+      baseUrl + '/profile/me',
+      headers: {'Authorization': _preferences.getString("token")}
+    );
+    print(res.body);
+    var resp = json.decode(res.body);
+    if (resp['error'] == null) return resp;
     else return resp;
   }
 }

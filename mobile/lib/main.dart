@@ -1,10 +1,9 @@
+import 'package:cdruk/api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
 
 import 'contact_screen.dart';
 import 'signup_screen.dart';
 import 'models_screen.dart';
-import 'contact_screen.dart';
 import 'package:cdruk/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,26 +34,37 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  var user;
+
   SharedPreferences preferences;
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((value) => preferences = value).then((value) {
+    if (preferences.getString("token") != null) {
+      api.getProfiile().then((value) {
+        setState(() {
+          user = value;
+        });
+      });
+    }
+    });
+  }
 
   Future<SharedPreferences> loadPreferences() async {
     var sr = await SharedPreferences.getInstance();
     return sr;
   }
 
-  @override
-  void initState() {
-    super.initState();
-    SharedPreferences.getInstance()
-        .then((value) => preferences = value)
-        .then((value) => build(context));
-  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: loadPreferences(),
       builder: (context, snapshot) {
+        preferences = snapshot.data;
         if (snapshot.hasError) return Text("$snapshot.error");
         if (snapshot.hasData) {
           return Scaffold(
@@ -126,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   context: context,
                   tiles: [
                     DrawerHeader(
-                      child: Text('CDRUK'),
+                      child: Text(user != null ? "Hello, " + user['name'] : 'CDRUK'),
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(179, 179, 179, 0.4),
                       ),
@@ -180,6 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onTap: () {
                           setState(() {
                             preferences.remove("token");
+                            user = null;
                           });
                         },
                       ),
