@@ -62,56 +62,61 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Text("CDRUK"),
             ),
             body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                      text:
-                          'Lekarzom w całej polsce brakuje sprzętu, Jest im teraz potrzebna pomoc, aby mogli pomagać nam\n',
-                      style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.black87,
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    RichText(
+                      text: TextSpan(
+                        text:
+                            'Lekarzom w całej polsce brakuje sprzętu, Jest im teraz potrzebna pomoc, aby mogli pomagać nam\n',
+                        style: TextStyle(
+                          fontSize: 26,
+                          color: Colors.black87,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text:
+                                  '\nMasz drukarkę 3D i chcesz pomóc służbie zdrowia?',
+                              style: TextStyle()),
+                        ],
                       ),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text:
-                                '\nMasz drukarkę 3D i chcesz pomóc służbie zdrowia?',
-                            style: TextStyle()),
-                      ],
                     ),
-                  ),
-                  RaisedButton(
-                    child: Text(
-                      'Zarejestruj się!',
-                      style: TextStyle(fontSize: 24),
+                    RaisedButton(
+                      child: Text(
+                        'Zarejestruj się!',
+                        style: TextStyle(
+                          fontSize: 24,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignupScreen()));
+                      },
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SignupScreen()));
-                    },
-                  ),
-                  RichText(
-                    text: TextSpan(
-                        text: '\nW twoim szpitalu brakuje sprzętu?',
-                        style: TextStyle(color: Colors.black, fontSize: 30)),
-                  ),
-                  RaisedButton(
-                    child: Text(
-                      'Zgłoś się do nas!',
-                      style: TextStyle(fontSize: 24),
+                    RichText(
+                      text: TextSpan(
+                          text: '\nW twoim szpitalu brakuje sprzętu?',
+                          style: TextStyle(color: Colors.black, fontSize: 26)),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ContactScreen()));
-                    },
-                  )
-                ],
+                    RaisedButton(
+                      child: Text(
+                        'Zgłoś się do nas!',
+                        style: TextStyle(fontSize: 24),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ContactScreen()));
+                      },
+                    )
+                  ],
+                ),
               ),
             ),
             drawer: Drawer(
