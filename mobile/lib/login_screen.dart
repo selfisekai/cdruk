@@ -12,10 +12,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   final TextEditingController _emailController = new TextEditingController();
   final TextEditingController _passwordController = new TextEditingController();
-  
+
   var _error;
 
   SharedPreferences preferences;
@@ -42,19 +41,23 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            TextField(
-              controller: _emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: "E-mail"
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: TextField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    labelText: "E-mail", border: OutlineInputBorder()),
               ),
             ),
-            TextField(
-              controller: _passwordController,
-              keyboardType: TextInputType.text,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: "Password"
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: TextField(
+                controller: _passwordController,
+                keyboardType: TextInputType.text,
+                obscureText: true,
+                decoration: InputDecoration(
+                    labelText: "Password", border: OutlineInputBorder()),
               ),
             ),
             Text(
@@ -64,9 +67,12 @@ class _LoginScreenState extends State<LoginScreen> {
             RaisedButton(
               child: Text("Login"),
               onPressed: () {
-                api.login(_emailController.text, _passwordController.text).then((value) {
+                api
+                    .login(_emailController.text, _passwordController.text)
+                    .then((value) {
                   if (value.runtimeType == String) {
-                    preferences.setString("token", json.decode(value)['data']['token']);
+                    preferences.setString(
+                        "token", json.decode(value)['data']['token']);
                   } else {
                     setState(() {
                       _error = value['error'];
