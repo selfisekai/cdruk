@@ -11,9 +11,9 @@ import register from './routes/register'
 import login from './routes/login'
 import models from './routes/models'
 import merchants from './routes/merchants'
-import { addOrder } from './routes/queue';
 import profile from './routes/profile'
 import verify from './routes/verify'
+import { addOrder, getMerchantQueue, getOrderList, setOrderStatus } from './routes/queue';
 
 let db: Connection
 
@@ -62,6 +62,9 @@ router
   .post('/addOrder', addOrder)
   .use('/profile', ...profile())
   .get('/verify/:uuid', verify)
+  .get('/getMerchantQueue', getMerchantQueue)
+  .get('/getOrderList', getOrderList)
+  .post('/setOrderStatus', setOrderStatus)
 
 const port = parseInt(process.env.PORT || '3001', 10)
 

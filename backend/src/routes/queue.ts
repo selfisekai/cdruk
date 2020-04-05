@@ -6,6 +6,7 @@ import { User } from '../entity/User'
 export async function addOrder(ctx: ExtendableContext) {
   const { body } = ctx.request
   const repo = ctx.getRepo(Order)
+  console.log(ctx.state.user)
 
   ctx.validate(typeof body.belongsTo === 'number', 'Merchant ID must be a number!')
   ctx.validate(typeof body.model === 'number', 'Model ID must be a number!')
@@ -23,7 +24,7 @@ export async function addOrder(ctx: ExtendableContext) {
   ctx.validate(body.amount > 0, 'Amount can not be lower than 1!') // /r/expectedfactorial
   
   const order = new Order()
-  order.requestedBy = ctx.state.user.id
+  order.requestedBy = ctx.state.user.uid
   order.belongsTo = body.belongsTo
   order.model = body.model
   order.amount = body.amount
@@ -32,17 +33,51 @@ export async function addOrder(ctx: ExtendableContext) {
   order.status = "new"
 
   await repo.save(order)
-  ctx.body = "success"
+  ctx.body = {
+  	data: {
+  	  status: "success"
+  	}
+  }
 }
 
-export async function cancelOrder(ctx: ExtendableContext) {
+export async function setOrderStatus(ctx: ExtendableContext) {
+  const { body } = ctx.request
+  const validStates = ['new','doing','done','aborted']
+  ctx.validate(validStates.includes(body.status), 'Invalid state!')
+  const repo = ctx.getRepo(Order)
+  let order = await repo.find({ where: { id: body.id, belongsTo: ctx.state.user.uid}})
+  ctx.validate(order.length != 0, 'Invalid order!')
+  order[0].status = body.status
+
+  await repo.save(order[0])
   
-}
-
-export async function getOrder(ctx: ExtendableContext) {
-  	
+  ctx.body = {
+  	data: {
+  	  status: "success"
+  	}
+  }
 }
 
 export async function getOrderList(ctx: ExtendableContext) {
-  	
+  const { body } = ctx.request
+  const repo = ctx.getRepo(Order)
+  const orders = await repo.find({ where: { requestedBy: ctx.state.user.uid }})
+  ctx.validate(orders.length != 0, 'This user has no orders!')
+  ctx.body = {
+  	data: {
+  	  orders
+  	}
+  }
+}
+
+export async function getMerchantQueue(ctx: ExtendableContext) {
+  const { body } = ctx.request
+  const repo = ctx.getRepo(Order)
+  const orders = await repo.find({ where: { belongsTo: ctx.state.user.uid }})
+  ctx.validate(orders.length != 0, 'This merchant has no orders!')
+  ctx.body =  {
+  	data: {
+  		orders
+  	}
+  }
 }
