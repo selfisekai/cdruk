@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../store'
 import { useRouter } from 'next/router'
 
-function Menu() {
+function Navbar() {
   const [isActive, setisActive] = useState(false)
   const isLogged = useSelector<{ isLogged: boolean }>((state) => state.isLogged)
   const dispatch = useDispatch()
@@ -41,7 +41,7 @@ function Menu() {
         >
           <div className="navbar-start">
             <Link href="/">
-              <a className="navbar-item">CDRUK</a>
+              <a className="navbar-item" style={{ fontWeight: 'bold', fontStyle: 'italic' }}>cdruk</a>
             </Link>
           </div>
 
@@ -73,4 +73,4 @@ function Menu() {
   )
 }
 
-export default Menu
+export default Navbar

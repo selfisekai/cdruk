@@ -882,7 +882,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.9.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
   integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
@@ -3341,7 +3341,7 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.3.0:
+hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -3788,6 +3788,11 @@ jsesc@~0.5.0:
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
   integrity sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=
 
+jsmin@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/jsmin/-/jsmin-1.0.1.tgz#e7bd0dcd6496c3bf4863235bf461a3d98aa3b98c"
+  integrity sha1-570NzWSWw79IYyNb9GGj2YqjuYw=
+
 json-parse-better-errors@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
@@ -3882,6 +3887,11 @@ lcid@^1.0.0:
   integrity sha1-MIrMr6C8SDo4Z7S28rlQYlHRuDU=
   dependencies:
     invert-kv "^1.0.0"
+
+leaflet@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.6.0.tgz#aecbb044b949ec29469eeb31c77a88e2f448f308"
+  integrity sha512-CPkhyqWUKZKFJ6K8umN5/D2wrJ2+/8UIpXppY7QDnUZW5bZL5+SEI2J7GBpwh4LIupOKqbNSQXgqmrEJopHVNQ==
 
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
@@ -4399,6 +4409,15 @@ node-sass@^4.13.1:
     sass-graph "^2.2.4"
     stdout-stream "^1.4.0"
     "true-case-path" "^1.0.2"
+
+nookies@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/nookies/-/nookies-2.2.2.tgz#fd0c53bc54ee971d8b64699968f3873abac65423"
+  integrity sha512-eJNpZ2n85wmdUEFU8/pAl9iqmklKXZBYiLuU1PLtSWLp0CXPMUPJZa2gmy16hLkjPuDIMkapPI0VxnOtI4hRGQ==
+  dependencies:
+    cookie "^0.4.0"
+    jsmin "^1.0.1"
+    set-cookie-parser "^2.4.3"
 
 "nopt@2 || 3":
   version "3.0.6"
@@ -5087,6 +5106,16 @@ react-is@^16.7.0, react-is@^16.8.1, react-is@^16.9.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-leaflet@^2.6.3:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-2.6.3.tgz#a826c20d7f4b530f38a1b71bfa9c51cefb598ce0"
+  integrity sha512-0ynYVkPNVJmjO7ewR+zBBu3sxbWmwJYkxd6SUJkQKG40+JNJEvYGSFPvP8W1BS9d0MntZFDTzEM1OdBiWMrlEA==
+  dependencies:
+    "@babel/runtime" "^7.8.7"
+    fast-deep-equal "^3.1.1"
+    hoist-non-react-statics "^3.3.2"
+    warning "^4.0.3"
+
 react-merge-refs@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-1.0.0.tgz#d6b297b9a62a266460a3c0d8b9d920731d8bbe63"
@@ -5596,6 +5625,11 @@ set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
   integrity sha1-BF+XgtARrppoA93TgrJDkrPYkPc=
+
+set-cookie-parser@^2.4.3:
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/set-cookie-parser/-/set-cookie-parser-2.4.5.tgz#94a5060724e614c56c65588010594dc4b848fb8d"
+  integrity sha512-LkSDwseogN5l6TerqGzFzL9mUDTxSq3hX2b5AaynjC1nSCNWiDypEgHatfc0v6KcnfgV3/6F6h4ABh6igjzlQQ==
 
 set-value@^2.0.0, set-value@^2.0.1:
   version "2.0.1"
@@ -6478,6 +6512,13 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
+
+warning@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
+  integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
+  dependencies:
+    loose-envify "^1.0.0"
 
 watchpack@2.0.0-beta.13:
   version "2.0.0-beta.13"
