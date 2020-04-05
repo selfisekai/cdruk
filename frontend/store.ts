@@ -128,9 +128,9 @@ export const fetchMerchants = () => async (dispatch, getState) => {
   try {
     dispatch({ type: actionTypes.FETCH_MERCHANTS_PENDING })
     const { data } = await api.get('/merchants', {
-      headers: {
-        Authorization: `Bearer ${getState().user.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${getState().user.token}`,
+      // },
     })
 
     dispatch({
