@@ -15,7 +15,8 @@ export default async function merchants(ctx: ExtendableContext) {
         id,
         name,
         location: `${52.23 + offset()} ${21.01 + offset()}`,
-        email: `${name}${Math.floor(Math.random() * 100)}-demo@cdruk.tech`
+        email: `${name}${Math.floor(Math.random() * 100)}-demo@cdruk.tech`,
+        description: `The description was left intentionally blank`
       }
     })
   }
